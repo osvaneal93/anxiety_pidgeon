@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pidge_on/sq_lite/sqlite_query.dart';
+import 'package:pidge_on/src/pages/fichatarea.dart';
 import 'package:pidge_on/src/pages/menu_page.dart';
+import 'package:pidge_on/src/pages/newnotes_page.dart';
 import 'package:pidge_on/src/pages/notas_page.dart';
 import 'package:flutter/services.dart';
 import 'package:pidge_on/src/santuario_page.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,6 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -29,19 +28,13 @@ class _MyAppState extends State<MyApp> {
   ];
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => SQLiteQuery(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        home: Scaffold(
-          body: _secciones[_paginaActual],
-          bottomNavigationBar: _botomNavigationBar(context),
-        ),
-      ),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: ListaTareas(),
+      //Scaffold(
+      //body: _secciones[_paginaActual],
+      //bottomNavigationBar: _botomNavigationBar(context),
+      //),
     );
   }
 
@@ -77,5 +70,68 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
     );
+  }
+}
+
+class ListaTareas extends StatefulWidget {
+  @override
+  _ListaTareasState createState() => _ListaTareasState();
+}
+
+class _ListaTareasState extends State<ListaTareas> {
+  List<Tarea> listaTareas;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Registro diario"),
+      ),
+      body: ListView.builder(
+        itemCount: listaTareas.length,
+        itemBuilder: (BuildContext context, int posicion) {
+          final item = listaTareas[posicion];
+          return new GestureDetector(
+            onTap: () {
+              _editarTarea(listaTareas[posicion], this, posicion);
+            },
+            child: Dismissible(
+              key: Key(item.nombre),
+              onDismissed: (direction) {
+                eliminar(posicion);
+              },
+              child: Card(
+                margin: EdgeInsets.all(1),
+                elevation: 2.0,
+                child: FichaTarea(),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void eliminar(int posicion) {
+    this.listaTareas.remove(posicion);
+    // Actualizamos Lista
+    actualizarLista();
+  }
+
+  void actualizarLista() {
+    setState(
+      () {
+        this.listaTareas = listaTareas;
+      },
+    );
+  }
+
+  void _editarTarea(Tarea tarea, _ListaTareasState obj, int posicion) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => nuevaTarea(tarea, 'Editar Tarea', obj, posicion),
+      ),
+    );
+    actualizarLista();
   }
 }

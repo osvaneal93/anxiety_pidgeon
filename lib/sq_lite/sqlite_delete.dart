@@ -10,5 +10,6 @@ class SQLiteDelete {
       where: "id=?",
       whereArgs: [note.id],
     );
+    print("hola");
   }
 }
