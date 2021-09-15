@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: Scaffold(
         body: Center(
@@ -47,7 +49,7 @@ class _MenuPageState extends State<MenuPage> {
         gradient: LinearGradient(
           begin: FractionalOffset(0.0, 0.3),
           end: FractionalOffset(0.0, 1.0),
-          colors: [Colors.white, Color(0xffE4EFDE)],
+          colors: [Colors.white, Colors.lightBlue.shade100],
         ),
       ),
     );
@@ -60,7 +62,7 @@ class _MenuPageState extends State<MenuPage> {
           borderRadius: BorderRadius.circular(80),
           gradient: LinearGradient(
             colors: [
-              Color(0xffB7D7DE),
+              Colors.lightBlue,
               Colors.white,
             ],
           ),
@@ -84,22 +86,25 @@ class _MenuPageState extends State<MenuPage> {
       child: Container(
         padding: EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Bienvenido al Lobby',
+              'Bienvenido a PidgeOn',
               style: TextStyle(
                   fontSize: 30,
-                  color: Color(0xff627188),
+                  color: Colors.white,
                   fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Container(
+              width: 100,
+              height: 100,
+              child: Image.asset("assets/pidgeon.png"),
             ),
             SizedBox(height: 10),
             Text(
               'Escoge entre las distintas lecciones y comienza a superar la ansiedad',
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xff627188),
-              ),
+              style: TextStyle(fontSize: 20, color: Colors.black),
             ),
           ],
         ),
@@ -113,60 +118,69 @@ Widget botonesRedondeados(BuildContext context) {
     children: [
       TableRow(
         children: [
-          _crearBoton(context, Color(0xff627188), Icons.accessibility_new_sharp,
-              'Conociendo la Ansiedad', 'leccion1'),
-          _crearBoton(context, Color(0xff627188), Icons.access_alarms_rounded,
-              'DORMIR', '/'),
+          _crearBoton(
+              context,
+              Colors.black,
+              Colors.black,
+              Icons.accessibility_new_sharp,
+              'Conociendo la Ansiedad',
+              '/leccionUno'),
+          _crearBoton(context, Colors.black, Colors.blue,
+              Icons.perm_device_info_rounded, 'Cómo iniciar...', '/'),
         ],
       ),
       TableRow(
         children: [
-          _crearBoton(context, Color(0xff627188), Icons.accessibility_new_sharp,
-              'Conociendonos', 'gladiador'),
-          _crearBoton(context, Color(0xff627188), Icons.access_alarms_rounded,
-              'DORMIR', '/'),
+          _crearBoton(context, Colors.black, Colors.red, Icons.all_inclusive,
+              '1.Nuestros Ciclos', 'gladiador'),
+          _crearBoton(context, Colors.black, Colors.green, Icons.eco,
+              '2.Somos naturaleza ', '/'),
         ],
       ),
       TableRow(
         children: [
-          _crearBoton(context, Color(0xff627188), Icons.accessibility_new_sharp,
-              'Conociendonos', 'gladiador'),
-          _crearBoton(context, Color(0xff627188), Icons.access_alarms_rounded,
-              'DORMIR', '/'),
+          _crearBoton(
+              context,
+              Colors.black,
+              Colors.yellow,
+              Icons.star_border_purple500_outlined,
+              '3.Decidir quienes somos',
+              'gladiador'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.emoji_nature_outlined, '4. La confianza', '/'),
         ],
       ),
       TableRow(
         children: [
-          _crearBoton(context, Color(0xff627188), Icons.accessibility_new_sharp,
-              'Conociendonos', 'gladiador'),
-          _crearBoton(context, Color(0xff627188), Icons.access_alarms_rounded,
-              'DORMIR', '/'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.hourglass_empty, '5.Titulo', 'gladiador'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.hourglass_empty, '6.Titulo', '/'),
         ],
       ),
       TableRow(
         children: [
-          _crearBoton(context, Color(0xff627188), Icons.accessibility_new_sharp,
-              'Conociendonos', 'gladiador'),
-          _crearBoton(context, Color(0xff627188), Icons.access_alarms_rounded,
-              'DORMIR', '/'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.hourglass_empty, '7.Titulo', 'gladiador'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.hourglass_empty, '8.Titulo', '/'),
         ],
       ),
       TableRow(
         children: [
-          _crearBoton(context, Color(0xff627188), Icons.accessibility_new_sharp,
-              'Conociendonos', 'gladiador'),
-          _crearBoton(context, Color(0xff627188), Icons.access_alarms_rounded,
-              'DORMIR', '/'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.hourglass_empty, '9.Titulo', 'gladiador'),
+          _crearBoton(context, Colors.black, Colors.black,
+              Icons.hourglass_empty, '10.Titulo', '/'),
         ],
       ),
     ],
   );
 }
 
-Widget _crearBoton(BuildContext context, Color colores, IconData iconoso,
-    String titulos, String secciones) {
+Widget _crearBoton(BuildContext context, Color colores, Color colorIcono,
+    IconData iconoso, String titulos, String secciones) {
   double heigth = MediaQuery.of(context).size.height;
-
   double width = MediaQuery.of(context).size.width;
   double miHeigth = heigth * 0.20;
   double cinco = width * 0.1;
@@ -174,36 +188,49 @@ Widget _crearBoton(BuildContext context, Color colores, IconData iconoso,
     onTap: () {
       Navigator.pushNamed(context, secciones);
     },
-    child: Container(
-      height: miHeigth,
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Color(0xffBED1E1),
+    child: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Icon(
-              iconoso,
-              color: colores,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+          child: Container(
+            height: miHeigth,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Colors.white.withOpacity(0.2),
+                Colors.white.withOpacity(0.5)
+              ]),
+              borderRadius: BorderRadius.circular(20),
             ),
-            radius: cinco,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  height: 10,
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    iconoso,
+                    color: colorIcono,
+                  ),
+                  radius: cinco,
+                ),
+                Text(
+                  titulos,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: colores),
+                ),
+                SizedBox(
+                  height: 10,
+                )
+              ],
+            ),
           ),
-          Text(
-            titulos,
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: colores),
-          ),
-          SizedBox(
-            height: 10,
-          )
-        ],
+        ),
       ),
     ),
   );

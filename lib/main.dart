@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pidge_on/src/pages/fichatarea.dart';
+import 'package:pidge_on/src/pages/leccion1.dart';
 import 'package:pidge_on/src/pages/menu_page.dart';
 import 'package:pidge_on/src/pages/newnotes_page.dart';
 import 'package:pidge_on/src/pages/notas_page.dart';
@@ -30,18 +31,26 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: ListaTareas(),
-      //Scaffold(
-      //body: _secciones[_paginaActual],
-      //bottomNavigationBar: _botomNavigationBar(context),
-      //),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        "/": (context) => EstructuraUno(context),
+        "/leccionUno": (context) => LeccionUno(),
+      },
+      initialRoute: "/",
+    );
+  }
+
+  Scaffold EstructuraUno(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(child: _secciones[_paginaActual]),
+      bottomNavigationBar: _botomNavigationBar(context),
     );
   }
 
   Widget _botomNavigationBar(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: Color(0xffB7D7DE),
+        canvasColor: Colors.white,
         primaryColor: Color(0xff627188),
         textTheme: Theme.of(context).textTheme.copyWith(
               caption: TextStyle(color: Colors.white),
@@ -87,9 +96,9 @@ class _ListaTareasState extends State<ListaTareas> {
         title: Text("Registro diario"),
       ),
       body: ListView.builder(
-        itemCount: listaTareas.length,
+        itemCount: 1,
         itemBuilder: (BuildContext context, int posicion) {
-          final item = listaTareas[posicion];
+          final item = listaTareas[1];
           return new GestureDetector(
             onTap: () {
               _editarTarea(listaTareas[posicion], this, posicion);
@@ -126,12 +135,6 @@ class _ListaTareasState extends State<ListaTareas> {
   }
 
   void _editarTarea(Tarea tarea, _ListaTareasState obj, int posicion) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => nuevaTarea(tarea, 'Editar Tarea', obj, posicion),
-      ),
-    );
     actualizarLista();
   }
 }
