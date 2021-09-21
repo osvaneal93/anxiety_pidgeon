@@ -19,7 +19,7 @@ class NoteList extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff627188),
+        backgroundColor: Colors.blue,
         child: Icon(Icons.add),
         onPressed: () => _openAddNotes(context),
       ),
