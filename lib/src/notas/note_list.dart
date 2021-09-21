@@ -59,7 +59,5 @@ class NoteList extends StatelessWidget {
             ),
           );
         });
-
-    print("hola");
   }
 }

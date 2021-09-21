@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pidge_on/sq_lite/sqlite_insert.dart';
 import 'package:pidge_on/sq_lite/sqlite_model/note.dart';
+import 'package:pidge_on/sq_lite/sqlite_query.dart';
+import 'package:pidge_on/src/notas/routes.dart';
+import 'package:pidge_on/src/pages/notas_page.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(AddNotes());
 
@@ -109,11 +113,20 @@ class _Forms extends StatelessWidget {
 
   void _save(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      SQLiteInsert().note(Note(
-        titulo: _tituloController.text.trim(),
-        registro: _registroController.text.trim(),
-      ));
-      Navigator.pop(context);
+      SQLiteInsert().note(
+        Note(
+          titulo: _tituloController.text.trim(),
+          registro: _registroController.text.trim(),
+        ),
+      );
+      Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
+      ;
     }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NotasPage()),
+    ).then((value) {
+      Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
+    });
   }
 }
