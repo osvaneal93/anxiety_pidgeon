@@ -10,6 +10,7 @@ class NotasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
+      debugShowCheckedModeBanner: false,
       initialRoute: Routes.home,
       routes: {
         Routes.home: (context) => NoteList(),

@@ -37,25 +37,36 @@ class NoteList extends StatelessWidget {
     return ListView.builder(
         itemCount: sqLiteQuery.notes.length,
         itemBuilder: (context, index) {
-          return Dismissible(
-            key: Key(
-              sqLiteQuery.notes[index].id.toString(),
-            ),
-            direction: DismissDirection.startToEnd,
-            background: Container(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Icon(Icons.delete),
+          return Container(
+            margin: EdgeInsets.all(3),
+            color: Colors.blue.shade300,
+            child: Dismissible(
+              key: Key(
+                sqLiteQuery.notes[index].id.toString(),
               ),
-            ),
-            onDismissed: (direction) {
-              SQLiteDelete().note(
-                sqLiteQuery.notes[index],
-              );
-              sqLiteQuery.updateNotes();
-            },
-            child: ListTile(
-              title: Text(sqLiteQuery.notes[index].titulo),
+              direction: DismissDirection.startToEnd,
+              background: Container(
+                color: Colors.red,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(Icons.delete),
+                ),
+              ),
+              onDismissed: (direction) {
+                SQLiteDelete().note(
+                  sqLiteQuery.notes[index],
+                );
+                sqLiteQuery.updateNotes();
+              },
+              child: ListTile(
+                title: Text(
+                  sqLiteQuery.notes[index].titulo,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              ),
             ),
           );
         });
