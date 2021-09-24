@@ -66,6 +66,7 @@ class NoteList extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
                 ),
+                trailing: IconButton(icon: Icon(Icons.edit), onPressed: () {}),
               ),
             ),
           );
