@@ -76,6 +76,7 @@ class NoteList extends StatelessWidget {
                   icon: Icon(Icons.edit),
                   onPressed: () => _openEditNotes(context),
                 ),
+                trailing: IconButton(icon: Icon(Icons.edit), onPressed: () {}),
               ),
             ),
           );
