@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-import 'package:flutter/cupertino.dart';
->>>>>>> c87581fa7489b9fa98cebd86381af4ab00a1720d
 import 'package:flutter/material.dart';
 import 'package:pidge_on/sq_lite/sqlite_model/note.dart';
 import 'package:pidge_on/sq_lite/sqlite_query.dart';
@@ -15,11 +11,7 @@ class EditNote extends StatelessWidget {
     final Note _note = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-<<<<<<< HEAD
         title: Text('Ver y editar'),
-=======
-        title: Text('Ver o Editar'),
->>>>>>> c87581fa7489b9fa98cebd86381af4ab00a1720d
       ),
       body: _Forms(_note),
     );
@@ -29,24 +21,14 @@ class EditNote extends StatelessWidget {
 class _Forms extends StatelessWidget {
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _registroController = TextEditingController();
-<<<<<<< HEAD
   final _formKey = GlobalKey<FormState>();
 
   final Note _note;
 
-=======
-
-  final Note _note;
->>>>>>> c87581fa7489b9fa98cebd86381af4ab00a1720d
   _Forms(this._note) {
     _tituloController.text = _note.titulo;
     _registroController.text = _note.registro;
   }
-<<<<<<< HEAD
-=======
-
-  final _formKey = GlobalKey<FormState>();
->>>>>>> c87581fa7489b9fa98cebd86381af4ab00a1720d
   @override
   Widget build(BuildContext context) {
     double heigth = MediaQuery.of(context).size.height;

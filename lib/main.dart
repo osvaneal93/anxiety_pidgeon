@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pidge_on/sq_lite/sqlite_edit.dart';
 import 'package:pidge_on/sq_lite/sqlite_query.dart';
-import 'package:pidge_on/src/notas/routes.dart';
 import 'package:pidge_on/src/pages/fichatarea.dart';
 import 'package:pidge_on/src/pages/leccion1.dart';
 import 'package:pidge_on/src/pages/menu_page.dart';
@@ -46,7 +44,6 @@ class _MyAppState extends State<MyApp> {
           "/": (context) => EstructuraUno(context),
           "/leccionUno": (context) => LeccionUno(),
           "/notes": (context) => NotasPage(),
-          Routes.editNote: (context) => EditNote()
         },
         initialRoute: "/",
       ),

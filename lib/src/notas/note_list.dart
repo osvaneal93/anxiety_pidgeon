@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pidge_on/sq_lite/sqlite_delete.dart';
 import 'package:pidge_on/sq_lite/sqlite_helper.dart';
+import 'package:pidge_on/sq_lite/sqlite_model/note.dart';
 import 'package:pidge_on/sq_lite/sqlite_query.dart';
 import 'package:pidge_on/src/notas/routes.dart';
 import 'package:provider/provider.dart';
@@ -32,8 +33,9 @@ class NoteList extends StatelessWidget {
     });
   }
 
-  void _openEditNotes(BuildContext context) {
-    Navigator.pushNamed(context, Routes.editNote).then((value) {
+  void _openEditNotes(BuildContext context, Note note) {
+    Navigator.pushNamed(context, Routes.editNote, arguments: note)
+        .then((value) {
       Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
     });
   }
@@ -74,9 +76,9 @@ class NoteList extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   icon: Icon(Icons.edit),
-                  onPressed: () => _openEditNotes(context),
+                  onPressed: () =>
+                      _openEditNotes(context, sqLiteQuery.notes[index]),
                 ),
-                trailing: IconButton(icon: Icon(Icons.edit), onPressed: () {}),
               ),
             ),
           );
