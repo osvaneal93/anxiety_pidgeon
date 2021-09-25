@@ -20,7 +20,14 @@ class LeccionUno extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.network(
-                        "https://images.pexels.com/photos/3771135/pexels-photo-3771135.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3771135.jpg&fm=jpg"),
+                      "https://images.pexels.com/photos/3771135/pexels-photo-3771135.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3771135.jpg&fm=jpg",
+                      loadingBuilder: (context, child, progress) =>
+                          progress == null
+                              ? child
+                              : Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(

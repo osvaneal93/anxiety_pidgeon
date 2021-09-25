@@ -32,6 +32,12 @@ class NoteList extends StatelessWidget {
     });
   }
 
+  void _openEditNotes(BuildContext context) {
+    Navigator.pushNamed(context, Routes.editNote).then((value) {
+      Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
+    });
+  }
+
   _showList(BuildContext context) {
     final SQLiteQuery sqLiteQuery = Provider.of<SQLiteQuery>(context);
     return ListView.builder(
@@ -39,7 +45,10 @@ class NoteList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.all(3),
-            color: Colors.blue.shade300,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: Colors.blue.shade200),
+                color: Colors.blueGrey.shade50),
             child: Dismissible(
               key: Key(
                 sqLiteQuery.notes[index].id.toString(),
@@ -61,10 +70,11 @@ class NoteList extends StatelessWidget {
               child: ListTile(
                 title: Text(
                   sqLiteQuery.notes[index].titulo,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () => _openEditNotes(context),
                 ),
               ),
             ),
