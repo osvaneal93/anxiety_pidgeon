@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pidge_on/sq_lite/sqlite_edit.dart';
 import 'package:pidge_on/sq_lite/sqlite_query.dart';
-import 'package:pidge_on/src/notas/routes.dart';
 import 'package:pidge_on/src/pages/fichatarea.dart';
 import 'package:pidge_on/src/pages/leccion1.dart';
 import 'package:pidge_on/src/pages/menu_page.dart';
 import 'package:pidge_on/src/pages/newnotes_page.dart';
 import 'package:pidge_on/src/pages/notas_page.dart';
 import 'package:flutter/services.dart';
-import 'package:pidge_on/src/santuario_page.dart';
+import 'package:pidge_on/src/santuario/principal_s.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -29,24 +27,18 @@ class _MyAppState extends State<MyApp> {
   List _secciones = [
     MenuPage(),
     NotasPage(),
-    SantuarioApp(),
+    SantuarioPrincipal(),
   ];
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => SQLiteQuery(),
-        ),
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => SQLiteQuery())],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => EstructuraUno(context),
           "/leccionUno": (context) => LeccionUno(),
-          "/notes": (context) => NotasPage(),
-          Routes.editNote: (context) => EditNote()
         },
         initialRoute: "/",
       ),
@@ -72,7 +64,6 @@ class _MyAppState extends State<MyApp> {
       child: BottomNavigationBar(
         currentIndex: _paginaActual,
         onTap: (index) {
-          Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
           setState(() {
             _paginaActual = index;
           });
