@@ -1,6 +1,9 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pidge_on/models/audioplayer_model.dart';
 import 'package:pidge_on/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class SantuarioPrincipal extends StatelessWidget {
   @override
@@ -22,6 +25,16 @@ class SantuarioPrincipal extends StatelessWidget {
                 height: height * .05,
               ),
               _TituloPlay(height: height),
+              Center(
+                child: Container(
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      ScaleAnimatedText('hola'),
+                    ],
+                    repeatForever: true,
+                  ),
+                ),
+              ),
             ],
           ),
         ],
@@ -75,11 +88,15 @@ class __TituloPlayState extends State<_TituloPlay>
         ),
         FloatingActionButton(
           onPressed: () {
+            final audioPlayerModel =
+                Provider.of<AudioPlayerModel>(context, listen: false);
             if (this.isPlaying) {
               playAnimation.reverse();
+              audioPlayerModel.controller.stop();
               this.isPlaying = false;
             } else {
               playAnimation.forward();
+              audioPlayerModel.controller.repeat();
               this.isPlaying = true;
             }
           },
@@ -107,6 +124,7 @@ final gradiente = Container(
 class RotateCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Center(
@@ -118,28 +136,35 @@ class RotateCircle extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(200),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Center(
-                child: Container(
-                  height: 270,
-                  width: 270,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(200),
-                    border: Border.all(color: Colors.blue),
+          child: SpinPerfect(
+            manualTrigger: true,
+            controller: (animationController) =>
+                audioPlayerModel.controller = animationController,
+            duration: Duration(seconds: 16),
+            infinite: true,
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Center(
+                  child: Container(
+                    height: 270,
+                    width: 270,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(200),
+                      border: Border.all(color: Colors.blue),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(200),
-                  color: Colors.green,
-                ),
-              )
-            ],
+                Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(200),
+                    color: Colors.green,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

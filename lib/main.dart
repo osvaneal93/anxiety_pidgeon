@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pidge_on/models/audioplayer_model.dart';
 import 'package:pidge_on/sq_lite/sqlite_query.dart';
 import 'package:pidge_on/src/pages/fichatarea.dart';
 import 'package:pidge_on/src/pages/leccion1.dart';
@@ -32,7 +33,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => SQLiteQuery())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => SQLiteQuery()),
+        ChangeNotifierProvider(create: (context) => new AudioPlayerModel())
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
