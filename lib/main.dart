@@ -6,8 +6,10 @@ import 'package:pidge_on/src/pages/menu_page.dart';
 import 'package:pidge_on/src/pages/newnotes_page.dart';
 import 'package:pidge_on/src/pages/notas_page.dart';
 import 'package:flutter/services.dart';
-import 'package:pidge_on/src/santuario_page.dart';
+import 'package:pidge_on/src/santuario/principal_s.dart';
 import 'package:provider/provider.dart';
+
+import 'models/audioplayer_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,21 +29,20 @@ class _MyAppState extends State<MyApp> {
   List _secciones = [
     MenuPage(),
     NotasPage(),
-    SantuarioApp(),
+    SantuarioPrincipal(),
   ];
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => SQLiteQuery(),
-        ),
+        ChangeNotifierProvider(create: (context) => SQLiteQuery()),
+        ChangeNotifierProvider(create: (context) => new AudioPlayerModel())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         routes: {
-          "/": (context) => EstructuraUno(context),
+          "/": (context) => estructuraUno(context),
           "/leccionUno": (context) => LeccionUno(),
           "/notes": (context) => NotasPage(),
         },
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Scaffold EstructuraUno(BuildContext context) {
+  Scaffold estructuraUno(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: _secciones[_paginaActual]),
       bottomNavigationBar: _botomNavigationBar(context),
@@ -69,7 +70,6 @@ class _MyAppState extends State<MyApp> {
       child: BottomNavigationBar(
         currentIndex: _paginaActual,
         onTap: (index) {
-          Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
           setState(() {
             _paginaActual = index;
           });
