@@ -2,8 +2,8 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
-void main() => runApp(MenuPage());
+import 'package:pidge_on/src/pages/lecciones.dart';
+import 'package:wakelock/wakelock.dart';
 
 class MenuPage extends StatefulWidget {
   @override
@@ -13,6 +13,8 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
+    var screenH = MediaQuery.of(context).size.height;
+    Wakelock.disable();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
@@ -21,6 +23,15 @@ class _MenuPageState extends State<MenuPage> {
           child: Stack(
             children: <Widget>[
               _fondoApp(context),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  margin: EdgeInsetsDirectional.only(start: 15, top: 5),
+                  height: screenH * .3,
+                  width: screenH * .3,
+                  child: Image.asset("assets/pidgeon_trans.png"),
+                ),
+              ),
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -49,7 +60,7 @@ class _MenuPageState extends State<MenuPage> {
         gradient: LinearGradient(
           begin: FractionalOffset(0.0, 0.3),
           end: FractionalOffset(0.0, 1.0),
-          colors: [Colors.white, Colors.lightBlue.shade100],
+          colors: [Colors.white, Colors.lightBlue.shade50],
         ),
       ),
     );
@@ -62,7 +73,7 @@ class _MenuPageState extends State<MenuPage> {
           borderRadius: BorderRadius.circular(80),
           gradient: LinearGradient(
             colors: [
-              Colors.lightBlue,
+              Colors.lightBlue.shade200,
               Colors.white,
             ],
           ),
@@ -92,20 +103,11 @@ class _MenuPageState extends State<MenuPage> {
               'Bienvenido a PidgeOn',
               style: TextStyle(
                   fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Quick'),
             ),
             SizedBox(height: 10),
-            Container(
-              width: 100,
-              height: 100,
-              child: Image.asset("assets/pidgeon.png"),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Escoge entre las distintas lecciones y comienza a superar la ansiedad',
-              style: TextStyle(fontSize: 20, color: Colors.black),
-            ),
+            Image.asset("assets/pidgeon_splash.png"),
           ],
         ),
       ),
@@ -124,17 +126,24 @@ Widget botonesRedondeados(BuildContext context) {
               Colors.black,
               Icons.accessibility_new_sharp,
               'Conociendo la Ansiedad',
-              '/leccionUno'),
-          _crearBoton(context, Colors.black, Colors.blue,
-              Icons.perm_device_info_rounded, 'Cómo iniciar...', '/'),
+              '/leccion1',
+              'assets/L1.png'),
+          _crearBoton(
+              context,
+              Colors.black,
+              Colors.blue,
+              Icons.perm_device_info_rounded,
+              'Cómo iniciar...',
+              '/leccion2',
+              'assets/L2.png'),
         ],
       ),
       TableRow(
         children: [
           _crearBoton(context, Colors.black, Colors.red, Icons.all_inclusive,
-              '1.Nuestros Ciclos', 'gladiador'),
+              '1.Nuestros Ciclos', 'gladiador', ''),
           _crearBoton(context, Colors.black, Colors.green, Icons.eco,
-              '2.Somos naturaleza ', '/'),
+              '2.Somos naturaleza ', '/', ''),
         ],
       ),
       TableRow(
@@ -145,33 +154,34 @@ Widget botonesRedondeados(BuildContext context) {
               Colors.yellow,
               Icons.star_border_purple500_outlined,
               '3.Decidir quienes somos',
-              'gladiador'),
+              'gladiador',
+              ''),
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.emoji_nature_outlined, '4. La confianza', '/'),
+              Icons.emoji_nature_outlined, '4. La confianza', '/', ''),
         ],
       ),
       TableRow(
         children: [
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.hourglass_empty, '5.Titulo', 'gladiador'),
+              Icons.hourglass_empty, '5.Titulo', 'gladiador', ''),
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.hourglass_empty, '6.Titulo', '/'),
+              Icons.hourglass_empty, '6.Titulo', '/', ''),
         ],
       ),
       TableRow(
         children: [
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.hourglass_empty, '7.Titulo', 'gladiador'),
+              Icons.hourglass_empty, '7.Titulo', 'gladiador', ''),
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.hourglass_empty, '8.Titulo', '/'),
+              Icons.hourglass_empty, '8.Titulo', '/', ''),
         ],
       ),
       TableRow(
         children: [
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.hourglass_empty, '9.Titulo', 'gladiador'),
+              Icons.hourglass_empty, '9.Titulo', 'gladiador', ''),
           _crearBoton(context, Colors.black, Colors.black,
-              Icons.hourglass_empty, '10.Titulo', '/'),
+              Icons.hourglass_empty, '10.Titulo', '/', ''),
         ],
       ),
     ],
@@ -179,29 +189,35 @@ Widget botonesRedondeados(BuildContext context) {
 }
 
 Widget _crearBoton(BuildContext context, Color colores, Color colorIcono,
-    IconData iconoso, String titulos, String secciones) {
+    IconData iconoso, String titulos, String nombreLeccion, String urlImagen) {
   double heigth = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
   double miHeigth = heigth * 0.20;
   double cinco = width * 0.1;
   return GestureDetector(
     onTap: () {
-      Navigator.pushNamed(context, secciones);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Leccion(nombreLeccion, urlImagen),
+        ),
+      );
     },
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
           child: Container(
             height: miHeigth,
             decoration: BoxDecoration(
+              border: Border.all(color: Colors.lightBlue.shade100, width: 5) ,
               gradient: LinearGradient(colors: [
                 Colors.white.withOpacity(0.2),
                 Colors.white.withOpacity(0.5)
               ]),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

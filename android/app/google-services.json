@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "648274271710",
+    "project_id": "pidgeon-dbc33",
+    "storage_bucket": "pidgeon-dbc33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648274271710:android:06519fa6a545b32be9114f",
+        "android_client_info": {
+          "package_name": "com.example.pidge_on"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648274271710-2j8vvi1sjqbnmejmvsqv5g0t4he2j2fp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhBDC1spvCTQTJiyxKfYiVmfFXJVfAztE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648274271710-2j8vvi1sjqbnmejmvsqv5g0t4he2j2fp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
