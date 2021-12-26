@@ -3,7 +3,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:pidge_on/src/pages/me_siento_mejor.dart';
-import 'package:pidge_on/widgets/appbar_nueva.dart';
 import 'package:wakelock/wakelock.dart';
 
 class SantuarioPrincipal extends StatelessWidget {
@@ -11,6 +10,8 @@ class SantuarioPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     Wakelock.enable();
     double height = MediaQuery.of(context).size.height;
+
+    double width = MediaQuery.of(context).size.width;
     Random aleatorio = Random();
     var hola = [
       "Aunque no lo creas, ahora estás a salvo y no va a sucederte nada.",
@@ -41,17 +42,26 @@ class SantuarioPrincipal extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          gradiente,
           Column(
             children: <Widget>[
-              Center(
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: instruccionesRespiracion()),
+              Container(
+                padding:
+                    EdgeInsets.only(top: height * .04, bottom: height * .02),
+                child: Text(
+                  "¿Cómo relajarme?",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                ),
+              ),
+              Container(
+                child: instruccionesRespiracion(),
+                margin: EdgeInsets.only(
+                    left: width * .029,
+                    right: width * .025,
+                    bottom: height * .040),
               ),
               RotateCircle(),
               SizedBox(
-                height: height * .08,
+                height: height * .05,
               ),
               Center(
                 child: textoAnimado(hola, aleatorio),
@@ -63,11 +73,12 @@ class SantuarioPrincipal extends StatelessWidget {
           ),
           Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
+                    //preferences.initialPage = AppBarNueva.routeName;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -75,18 +86,28 @@ class SantuarioPrincipal extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text('Me siento Mejor'),
+                  child: Container(
+                    height: height * .06,
+                    width: width * .6,
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade300,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '¡ME SIENTO MEJOR!',
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Caviar',
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  height: height * .02,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Me siento Mejorcito'),
-                ),
-                SizedBox(
-                  height: height * .1,
-                ),
+                  height: height * .08,
+                )
               ],
             ),
           ),
@@ -97,6 +118,7 @@ class SantuarioPrincipal extends StatelessWidget {
 
   Container textoAnimado(List<String> hola, Random aleatorio) {
     return Container(
+      padding: EdgeInsets.only(left: 30, right: 30),
       child: AnimatedTextKit(
         animatedTexts: [
           fadeAnimated(hola, aleatorio),
@@ -137,11 +159,12 @@ class SantuarioPrincipal extends StatelessWidget {
 
   Text instruccionesRespiracion() {
     return Text(
-      "Pactica tu respiración diafragmática"
+      "Practica tu respiración diafragmática,"
       " respira por la nariz, cuando inhales (tomes aire) llévalo a"
       " la boca del estómago lentamente, al exhalar hazlo por la boca"
-      " sacando lentamente todo el aire",
-      style: TextStyle(fontSize: 20),
+      " sacando lentamente todo el aire. \n Puedes hacerlo mientras escuchas sonidos relajantes.",
+      style: TextStyle(
+          fontSize: 22, fontFamily: "caviar", fontWeight: FontWeight.bold),
     );
   }
 
@@ -163,7 +186,7 @@ final gradiente = Container(
     gradient: LinearGradient(
       begin: FractionalOffset(0.0, 0.3),
       end: FractionalOffset(0.0, 1.0),
-      colors: [Colors.white, Colors.lightBlue.shade100],
+      colors: [Colors.white, Colors.lightBlue.shade50],
     ),
   ),
 );
@@ -172,6 +195,8 @@ class RotateCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
+    double height = MediaQuery.of(context).size.height;
     return Center(
       child: Container(
         height: width * .6,
@@ -180,6 +205,13 @@ class RotateCircle extends StatelessWidget {
           borderRadius: BorderRadius.circular(200),
           child: Stack(
             children: [
+              Center(
+                child: Container(
+                  height: height * .25,
+                  width: height * .25,
+                  child: Image.asset('assets/pidgeon_trans.png'),
+                ),
+              ),
               Center(
                 child: Container(
                   child: AnimatedTextKit(

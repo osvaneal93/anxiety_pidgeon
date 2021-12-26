@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pidge_on/src/pages/onboard_steps.dart';

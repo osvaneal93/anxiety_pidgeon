@@ -82,13 +82,13 @@ class Leccion extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15),
+                          padding: const EdgeInsets.only(top: 15, bottom: 30),
                           child: Center(
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Volver'),
+                              child: Text('    Volver    '),
                             ),
                           ),
                         )

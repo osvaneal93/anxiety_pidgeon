@@ -23,7 +23,7 @@ class OnBoardSteps extends StatelessWidget {
     var screenH = MediaQuery.of(context).size.height;
 
     var screenW = MediaQuery.of(context).size.width;
-
+    final preferences = Preferences();
     var onBoardingProvider = Provider.of<OnBoardingProvider>(context);
     return Container(
       child: SafeArea(
@@ -73,7 +73,7 @@ class OnBoardSteps extends StatelessWidget {
               if (onBoardingProvider.currentPage == 3)
                 GestureDetector(
                   onTap: () {
-                    //preferences.initialPage = AppBarNueva.routeName;
+                    preferences.initialPage = AppBarNueva.routeName;
                     Navigator.pushReplacementNamed(
                         context, AppBarNueva.routeName);
                   },

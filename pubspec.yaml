@@ -57,6 +57,9 @@ flutter:
     - assets/pidgeon.png
     - assets/L1.png
     - assets/L2.png
+    - assets/L3.png
+    - assets/L4.png
+    - assets/L5.png
     - assets/pidgeon_trans.png
     - assets/pidgeon_splash.png
     - assets/emojis.riv
@@ -64,6 +67,7 @@ flutter:
     - assets/lecciones.png
     - assets/registro.png
     - assets/santuario.png
+    - assets/olivos.png
   fonts:
     - family: Caviar
       fonts:
