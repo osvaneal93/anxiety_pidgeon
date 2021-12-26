@@ -5,6 +5,7 @@ import 'package:pidge_on/sq_lite/sqlite_delete.dart';
 import 'package:pidge_on/sq_lite/sqlite_helper.dart';
 import 'package:pidge_on/sq_lite/sqlite_model/note.dart';
 import 'package:pidge_on/sq_lite/sqlite_query.dart';
+import 'package:pidge_on/src/notas/add_note.dart';
 import 'package:pidge_on/src/notas/routes.dart';
 import 'package:provider/provider.dart';
 
@@ -35,20 +36,29 @@ class NoteList extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),
-        onPressed: () => _openAddNotes(context),
+        onPressed: () => _openAddNotes(context)
       ),
     );
   }
 
   void _openAddNotes(BuildContext context) {
-    Navigator.pushNamed(context, Routes.addNote).then((value) {
+     Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddNotes(),
+                      ),
+                    ).then((value) {
       Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
     });
   }
 
   void _openEditNotes(BuildContext context, Note note) {
-    Navigator.pushNamed(context, Routes.editNote, arguments: note)
-        .then((value) {
+    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddNotes(),
+                      ), 
+                    ).then((value) {
       Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
     });
   }

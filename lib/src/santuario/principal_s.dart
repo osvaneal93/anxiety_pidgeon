@@ -5,7 +5,12 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:pidge_on/src/pages/me_siento_mejor.dart';
 import 'package:wakelock/wakelock.dart';
 
-class SantuarioPrincipal extends StatelessWidget {
+class SantuarioPrincipal extends StatefulWidget {
+  @override
+  State<SantuarioPrincipal> createState() => _SantuarioPrincipalState();
+}
+
+class _SantuarioPrincipalState extends State<SantuarioPrincipal> {
   @override
   Widget build(BuildContext context) {
     Wakelock.enable();
@@ -49,11 +54,11 @@ class SantuarioPrincipal extends StatelessWidget {
                     EdgeInsets.only(top: height * .04, bottom: height * .02),
                 child: Text(
                   "¿Cómo relajarme?",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: height * .04),
                 ),
               ),
               Container(
-                child: instruccionesRespiracion(),
+                child: instruccionesRespiracion(context),
                 margin: EdgeInsets.only(
                     left: width * .029,
                     right: width * .025,
@@ -64,7 +69,7 @@ class SantuarioPrincipal extends StatelessWidget {
                 height: height * .05,
               ),
               Center(
-                child: textoAnimado(hola, aleatorio),
+                child: textoAnimado(context, hola, aleatorio),
               ),
               SizedBox(
                 height: height * .05,
@@ -78,7 +83,6 @@ class SantuarioPrincipal extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    //preferences.initialPage = AppBarNueva.routeName;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -97,7 +101,7 @@ class SantuarioPrincipal extends StatelessWidget {
                       child: Text(
                         '¡ME SIENTO MEJOR!',
                         style: TextStyle(
-                            fontSize: 25,
+                            fontSize:width * .04,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Caviar',
                             color: Colors.white),
@@ -116,65 +120,69 @@ class SantuarioPrincipal extends StatelessWidget {
     );
   }
 
-  Container textoAnimado(List<String> hola, Random aleatorio) {
+  Container textoAnimado(context, List<String> hola, Random aleatorio) {
+    
+    double width = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.only(left: 30, right: 30),
+      padding: EdgeInsets.only(left: width * .05, right: width * .05),
       child: AnimatedTextKit(
         animatedTexts: [
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
-          fadeAnimated(hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+          fadeAnimated(context, hola, aleatorio),
+
+          
         ],
         repeatForever: true,
       ),
     );
   }
 
-  Text instruccionesRespiracion() {
+  Text instruccionesRespiracion(context) {
+    
+    double height = MediaQuery.of(context).size.height;
     return Text(
       "Practica tu respiración diafragmática,"
       " respira por la nariz, cuando inhales (tomes aire) llévalo a"
       " la boca del estómago lentamente, al exhalar hazlo por la boca"
       " sacando lentamente todo el aire. \n Puedes hacerlo mientras escuchas sonidos relajantes.",
       style: TextStyle(
-          fontSize: 22, fontFamily: "caviar", fontWeight: FontWeight.bold),
+          fontSize: height * .02, fontFamily: "caviar", fontWeight: FontWeight.bold),
     );
   }
 
-  FadeAnimatedText fadeAnimated(List<String> hola, Random aleatorio) {
+  FadeAnimatedText fadeAnimated(context, List<String> hola, Random aleatorio) {
+    
+    double width = MediaQuery.of(context).size.width;
     return FadeAnimatedText(
       hola[aleatorio.nextInt(11)],
       textAlign: TextAlign.center,
       duration: Duration(seconds: 15),
       textStyle: TextStyle(
-          fontSize: 35, fontWeight: FontWeight.bold, color: Colors.blue),
+          fontSize: width * .05, fontWeight: FontWeight.bold, color: Colors.blue),
     );
   }
 }
@@ -199,16 +207,16 @@ class RotateCircle extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Center(
       child: Container(
-        height: width * .6,
-        width: width * .6,
+        height: width * .4,
+        width: width * .4,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(200),
           child: Stack(
             children: [
               Center(
                 child: Container(
-                  height: height * .25,
-                  width: height * .25,
+                  height: height * .2,
+                  width: height * .2,
                   child: Image.asset('assets/pidgeon_trans.png'),
                 ),
               ),
@@ -220,7 +228,7 @@ class RotateCircle extends StatelessWidget {
                         'INHALA',
                         duration: Duration(milliseconds: 5700),
                         textStyle: TextStyle(
-                            fontSize: 35,
+                            fontSize: width * .05,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue),
                       ),
@@ -228,7 +236,7 @@ class RotateCircle extends StatelessWidget {
                         'EXHALA',
                         duration: Duration(milliseconds: 5700),
                         textStyle: TextStyle(
-                            fontSize: 35,
+                            fontSize: width * .05,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue),
                       ),
@@ -245,8 +253,8 @@ class RotateCircle extends StatelessWidget {
                   children: [
                     Center(
                       child: Container(
-                        height: 270,
-                        width: 270,
+                        height: width * .35,
+                        width: width * .35,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(200),
                           border: Border.all(color: Colors.blue),
@@ -254,8 +262,8 @@ class RotateCircle extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 30,
-                      width: 30,
+                      height: width * .05,
+                      width: width * .05,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(200),
                         color: Colors.green,

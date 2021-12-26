@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pidge_on/src/pages/onboard_screen.dart';
 import 'package:pidge_on/src/pages/onboarding_provider.dart';
+import 'package:pidge_on/test/formulario.dart';
 import 'package:pidge_on/utils/preferences.dart';
 import 'package:pidge_on/widgets/appbar_nueva.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,8 @@ class _MyAppState extends State<MyApp> {
         routes: {
           OnBoarding.routeName: (_) => OnBoarding(),
           AppBarNueva.routeName: (_) => AppBarNueva(),
+          PruebaUno.routeName: (_) => PruebaUno(),
+          
         },
         initialRoute: preferences.initialPage,
       ),

@@ -18,7 +18,7 @@ class OnBoarding extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: EdgeInsets.only(bottom: screenH * .1),
+              margin: EdgeInsets.only(bottom: screenH * .05),
               child: _Dots(),
             ),
           )

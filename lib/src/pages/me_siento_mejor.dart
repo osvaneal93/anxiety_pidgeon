@@ -63,7 +63,7 @@ class _MeSientoMejorState extends State<MeSientoMejor> {
                     child: Text(
                       '¡Lo lograste!',
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: screenW * .05,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Caviar'),
                     ),
@@ -82,7 +82,7 @@ class _MeSientoMejorState extends State<MeSientoMejor> {
                       'que has logrado sentirte mejor, y así poco a poco, podremos superar esta prueba.'
                       ,
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: screenW * .035,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Caviar'),
                     ),
@@ -109,7 +109,6 @@ class _MeSientoMejorState extends State<MeSientoMejor> {
                   ),
                   GestureDetector(
                   onTap: () {
-                    //preferences.initialPage = AppBarNueva.routeName;
                     Navigator.pop(
                       context
                       
@@ -126,7 +125,7 @@ class _MeSientoMejorState extends State<MeSientoMejor> {
                       child: Text(
                         'Volver al Santuario',
                         style: TextStyle(
-                            fontSize: 25,
+                            fontSize: screenW * .05,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Caviar',
                             color: Colors.white),

@@ -5,17 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:pidge_on/src/pages/lecciones.dart';
 import 'package:wakelock/wakelock.dart';
 
-class MenuPage extends StatefulWidget {
+class PruebaUno extends StatefulWidget {
+
+  static final String routeName = 'prueba1';
+
   @override
-  _MenuPageState createState() => _MenuPageState();
+  State<PruebaUno> createState() => _PruebaUnoState();
 }
 
-class _MenuPageState extends State<MenuPage> {
+class _PruebaUnoState extends State<PruebaUno> {
   @override
   Widget build(BuildContext context) {
     var screenH = MediaQuery.of(context).size.height;
     Wakelock.disable();
-    return Scaffold(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
+      home: Scaffold(
         body: Center(
           child: Stack(
             children: <Widget>[
@@ -40,6 +46,7 @@ class _MenuPageState extends State<MenuPage> {
             ],
           ),
         ),
+      ),
     );
   }
 
@@ -104,7 +111,9 @@ class _MenuPageState extends State<MenuPage> {
             ),
             SizedBox(height: 10),
             Image.asset("assets/pidgeon_splash.png"),
-            
+            TextField(
+              maxLines: 10,
+            )
           ],
         ),
       ),

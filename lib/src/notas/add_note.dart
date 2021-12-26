@@ -15,16 +15,12 @@ class AddNotes extends StatefulWidget {
 class _AddNotesState extends State<AddNotes> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Material App Bar'),
         ),
         body: _Forms(),
-      ),
-    );
+      );
   }
 }
 
@@ -70,16 +66,15 @@ class _Forms extends StatelessWidget {
                 ),
               ),
             ),
-            
             Container(
               padding: EdgeInsets.all(cinco),
               child: TextFormField(
-                controller: _registroController,
-                validator: (value) => _validateRegistro(value),
-                maxLines: 30,
+                maxLines: 25,
+                controller: _tituloController,
+                validator: (value) => _validateTitulo(value),
                 decoration: InputDecoration(
-                  labelText: 'Registro',
                   alignLabelWithHint: true,
+                  labelText: 'Registro',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),

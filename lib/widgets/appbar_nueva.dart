@@ -4,6 +4,7 @@ import 'package:pidge_on/sq_lite/sqlite_query.dart';
 import 'package:pidge_on/src/pages/menu_page.dart';
 import 'package:pidge_on/src/pages/notas_page.dart';
 import 'package:pidge_on/src/santuario/principal_s.dart';
+import 'package:pidge_on/test/formulario.dart';
 import 'package:provider/provider.dart';
 
 
@@ -21,6 +22,7 @@ class _AppBarNuevaState extends State<AppBarNueva> {
 
     int _paginaActual = 0;
   List _secciones = [
+    
     MenuPage(),
     NotasPage(),
     SantuarioPrincipal(),
@@ -42,7 +44,6 @@ class _AppBarNuevaState extends State<AppBarNueva> {
           future: _initialization,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Container();
             }
             if (snapshot.connectionState == ConnectionState.done) {
               return estructuraUno(context);
@@ -62,7 +63,9 @@ class _AppBarNuevaState extends State<AppBarNueva> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body:  _secciones[_paginaActual],
+        body:  
+       _secciones[_paginaActual]
+        ,
         bottomNavigationBar: _botomNavigationBar(context),
       ),
     );
@@ -71,11 +74,7 @@ class _AppBarNuevaState extends State<AppBarNueva> {
   Widget _botomNavigationBar(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: Colors.white,
         primaryColor: Color(0xff627188),
-        textTheme: Theme.of(context).textTheme.copyWith(
-              caption: TextStyle(color: Colors.white),
-            ),
       ),
       child: BottomNavigationBar(
         currentIndex: _paginaActual,
