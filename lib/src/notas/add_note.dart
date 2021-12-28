@@ -16,22 +16,28 @@ class _AddNotesState extends State<AddNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: _Forms(),
-      );
+      appBar: AppBar(
+        title: Text('Material App Bar'),
+      ),
+      body: _Forms(),
+    );
   }
 }
 
-class _Forms extends StatelessWidget {
+class _Forms extends StatefulWidget {
+  @override
+  State<_Forms> createState() => _FormsState();
+}
+
+class _FormsState extends State<_Forms> {
   final TextEditingController _tituloController = TextEditingController();
+
   final TextEditingController _registroController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
     double cinco = width * 0.05;
 
@@ -70,8 +76,8 @@ class _Forms extends StatelessWidget {
               padding: EdgeInsets.all(cinco),
               child: TextFormField(
                 maxLines: 25,
-                controller: _tituloController,
-                validator: (value) => _validateTitulo(value),
+                controller: _registroController,
+                validator: (value) => _validateRegistro(value),
                 decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Registro',
@@ -83,7 +89,6 @@ class _Forms extends StatelessWidget {
                 ),
               ),
             ),
-            
           ],
         ),
       ),
@@ -109,13 +114,7 @@ class _Forms extends StatelessWidget {
         ),
       );
       Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
-      ;
+      Navigator.pop(context);
     }
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NotasPage()),
-    ).then((value) {
-      Provider.of<SQLiteQuery>(context, listen: false).updateNotes();
-    });
   }
 }
