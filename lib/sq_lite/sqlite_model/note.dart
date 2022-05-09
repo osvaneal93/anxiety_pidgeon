@@ -4,6 +4,7 @@ class Note {
   final String registro;
 
   Note({this.id, this.titulo, this.registro});
+  
   Map<String, dynamic> toMap() {
     return {
       "titulo": this.titulo,
